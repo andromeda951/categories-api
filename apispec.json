@@ -81,7 +81,6 @@
                     },
                     "data": {
                       "$ref": "#/components/schemas/Category"
-                      }
                     }
                   }
                 }
@@ -90,6 +89,44 @@
           }
         }
       }
+    },
+    "/categories/{categoryId}": {
+      "get": {
+        "tags": ["Category API"],
+        "summary": "Get Category by Id",
+        "description": "Get category by id",
+        "parameters": [
+          {
+            "name": "categoryId",
+            "in": "path",
+            "description": "Category Id"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success get category",
+            "content": {
+              "aplication/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "integer"
+                    },
+                    "status": {
+                      "type": "string"
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/Category"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
   },
   "components": {
     "schemas": {
