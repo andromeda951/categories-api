@@ -3,8 +3,13 @@ package main
 import (
 	"andromeda/belajar-golang-restful-api/app"
 	"andromeda/belajar-golang-restful-api/controller"
+	"andromeda/belajar-golang-restful-api/helper"
 	"andromeda/belajar-golang-restful-api/repository"
 	"andromeda/belajar-golang-restful-api/service"
+	"log"
+	"net/http"
+
+	_ "github.com/go-sql-driver/mysql"
 
 	"github.com/go-playground/validator/v10"
 	"github.com/julienschmidt/httprouter"
@@ -25,4 +30,13 @@ func main() {
 	router.POST("/api/categories", categoryController.Create)
 	router.PUT("/api/categories", categoryController.Update)
 	router.DELETE("/api/categories", categoryController.Delete)
+
+	server := http.Server{
+		Addr: "localhost:3000",
+		Handler: router,
+	}
+
+	log.Println("API is running!")
+	err := server.ListenAndServe()
+	helper.PanicIfError(err)
 }
