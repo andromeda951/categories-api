@@ -44,7 +44,7 @@ func (service *CategoryServiceImpl) Create(ctx context.Context, request web.Cate
 }
 
 // Upadate implements CategoryService
-func (service *CategoryServiceImpl) Upadate(ctx context.Context, request web.CategoryUpadateRequest) web.CategoryResponse {
+func (service *CategoryServiceImpl) Update(ctx context.Context, request web.CategoryUpadateRequest) web.CategoryResponse {
 	err := service.Validate.Struct(request)
 	helper.PanicIfError(err)
 	

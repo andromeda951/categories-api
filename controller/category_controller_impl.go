@@ -51,7 +51,7 @@ func (controller *CategoryControllerImpl) Update(writer http.ResponseWriter, req
 	categoryUpdateRequest.Id = id
 
 	// Create response
-	categoryResponse := controller.CategoryService.Upadate(request.Context(), categoryUpdateRequest)
+	categoryResponse := controller.CategoryService.Update(request.Context(), categoryUpdateRequest)
 	webResponse := web.WebResponse{
 		Code:   200,
 		Status: "OK",
