@@ -3,6 +3,7 @@ package main
 import (
 	"andromeda/belajar-golang-restful-api/app"
 	"andromeda/belajar-golang-restful-api/controller"
+	"andromeda/belajar-golang-restful-api/exception"
 	"andromeda/belajar-golang-restful-api/helper"
 	"andromeda/belajar-golang-restful-api/repository"
 	"andromeda/belajar-golang-restful-api/service"
@@ -30,6 +31,8 @@ func main() {
 	router.POST("/api/categories", categoryController.Create)
 	router.PUT("/api/categories/:categoryId", categoryController.Update)
 	router.DELETE("/api/categories/:categoryId", categoryController.Delete)
+
+	router.PanicHandler = exception.ErrorHandler
 
 	server := http.Server{
 		Addr: "localhost:3000",
