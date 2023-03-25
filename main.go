@@ -5,6 +5,7 @@ import (
 	"andromeda/belajar-golang-restful-api/controller"
 	"andromeda/belajar-golang-restful-api/exception"
 	"andromeda/belajar-golang-restful-api/helper"
+	"andromeda/belajar-golang-restful-api/middleware"
 	"andromeda/belajar-golang-restful-api/repository"
 	"andromeda/belajar-golang-restful-api/service"
 	"log"
@@ -36,7 +37,7 @@ func main() {
 
 	server := http.Server{
 		Addr: "localhost:3000",
-		Handler: router,
+		Handler: middleware.NewAuthMiddleware(router),
 	}
 
 	log.Println("API is running!")
