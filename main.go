@@ -11,11 +11,15 @@ import (
 	"net/http"
 
 	_ "github.com/go-sql-driver/mysql"
+	"github.com/joho/godotenv"
 
 	"github.com/go-playground/validator/v10"
 )
 
 func main() {
+
+	err := godotenv.Load()
+	helper.PanicIfError(err)
 
 	db := app.NewDB()
 	validate := validator.New()
@@ -31,6 +35,6 @@ func main() {
 	}
 
 	log.Println("API is running!")
-	err := server.ListenAndServe()
+	err = server.ListenAndServe()
 	helper.PanicIfError(err)
 }

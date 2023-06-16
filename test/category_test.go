@@ -14,6 +14,7 @@ import (
 	"io"
 	"net/http"
 	"net/http/httptest"
+	"os"
 	"strconv"
 	"strings"
 	"testing"
@@ -59,7 +60,7 @@ func TestCreateCategorySuccess(t *testing.T) {
 	requestBody := strings.NewReader(`{"name": "Gadget"}`)
 	request := httptest.NewRequest(http.MethodPost, "http://localhost:3000/api/categories", requestBody)
 	request.Header.Add("Content-Type", "aplication/json")
-	request.Header.Add("X-API-Key", "RAHASIA")
+	request.Header.Add("X-API-Key", os.Getenv("API_KEY"))
 
 	recorder := httptest.NewRecorder()
 
@@ -86,7 +87,7 @@ func TestCreateCategoryFailed(t *testing.T) {
 	requestBody := strings.NewReader(`{"name": ""}`)
 	request := httptest.NewRequest(http.MethodPost, "http://localhost:3000/api/categories", requestBody)
 	request.Header.Add("Content-Type", "aplication/json")
-	request.Header.Add("X-API-Key", "RAHASIA")
+	request.Header.Add("X-API-Key", os.Getenv("API_KEY"))
 
 	recorder := httptest.NewRecorder()
 
@@ -118,7 +119,7 @@ func TestUpdateCategorySuccess(t *testing.T) {
 	requestBody := strings.NewReader(`{"name": "Handphone"}`)
 	request := httptest.NewRequest(http.MethodPut, "http://localhost:3000/api/categories/" + strconv.Itoa(category.Id), requestBody)
 	request.Header.Add("Content-Type", "aplication/json")
-	request.Header.Add("X-API-Key", "RAHASIA")
+	request.Header.Add("X-API-Key", os.Getenv("API_KEY"))
 
 	recorder := httptest.NewRecorder()
 
@@ -155,7 +156,7 @@ func TestUpdateCategoryFailed(t *testing.T) {
 	requestBody := strings.NewReader(`{"name": ""}`)
 	request := httptest.NewRequest(http.MethodPut, "http://localhost:3000/api/categories/" + strconv.Itoa(category.Id), requestBody)
 	request.Header.Add("Content-Type", "aplication/json")
-	request.Header.Add("X-API-Key", "RAHASIA")
+	request.Header.Add("X-API-Key", os.Getenv("API_KEY"))
 
 	recorder := httptest.NewRecorder()
 
@@ -186,7 +187,7 @@ func TestGetCategorySuccess(t *testing.T) {
 	router := setupRouter(db)
 
 	request := httptest.NewRequest(http.MethodGet, "http://localhost:3000/api/categories/" + strconv.Itoa(category.Id), nil)
-	request.Header.Add("X-API-Key", "RAHASIA")
+	request.Header.Add("X-API-Key", os.Getenv("API_KEY"))
 
 	recorder := httptest.NewRecorder()
 
@@ -212,7 +213,7 @@ func TestGetCategoryFailed(t *testing.T) {
 	router := setupRouter(db)
 
 	request := httptest.NewRequest(http.MethodGet, "http://localhost:3000/api/categories/123", nil)
-	request.Header.Add("X-API-Key", "RAHASIA")
+	request.Header.Add("X-API-Key", os.Getenv("API_KEY"))
 
 	recorder := httptest.NewRecorder()
 
@@ -243,7 +244,7 @@ func TestDeleteCategorySuccess(t *testing.T) {
 	router := setupRouter(db)
 
 	request := httptest.NewRequest(http.MethodDelete, "http://localhost:3000/api/categories/" + strconv.Itoa(category.Id), nil)
-	request.Header.Add("X-API-Key", "RAHASIA")
+	request.Header.Add("X-API-Key", os.Getenv("API_KEY"))
 
 	recorder := httptest.NewRecorder()
 
@@ -267,7 +268,7 @@ func TestDeleteCategoryFailed(t *testing.T) {
 	router := setupRouter(db)
 
 	request := httptest.NewRequest(http.MethodDelete, "http://localhost:3000/api/categories/123", nil)
-	request.Header.Add("X-API-Key", "RAHASIA")
+	request.Header.Add("X-API-Key", os.Getenv("API_KEY"))
 
 	recorder := httptest.NewRecorder()
 
@@ -301,7 +302,7 @@ func TestListCategoriesSuccess(t *testing.T) {
 	router := setupRouter(db)
 
 	request := httptest.NewRequest(http.MethodGet, "http://localhost:3000/api/categories", nil)
-	request.Header.Add("X-API-Key", "RAHASIA")
+	request.Header.Add("X-API-Key", os.Getenv("API_KEY"))
 
 	recorder := httptest.NewRecorder()
 

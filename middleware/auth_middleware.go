@@ -4,6 +4,7 @@ import (
 	"andromeda/belajar-golang-restful-api/helper"
 	"andromeda/belajar-golang-restful-api/model/web"
 	"net/http"
+	"os"
 )
 
 type AuthMiddleware struct {
@@ -14,8 +15,8 @@ func NewAuthMiddleware(handler http.Handler) *AuthMiddleware {
 	return &AuthMiddleware{Handler: handler}
 }
 
-func (middleware *AuthMiddleware) ServeHTTP(writer http.ResponseWriter, request *http.Request)  {
-	if request.Header.Get("X-API-Key") == "RAHASIA" {
+func (middleware *AuthMiddleware) ServeHTTP(writer http.ResponseWriter, request *http.Request) {
+	if request.Header.Get("X-API-Key") == os.Getenv("API_KEY") {
 		// ok
 		middleware.Handler.ServeHTTP(writer, request)
 	} else {
