@@ -9,6 +9,7 @@ import (
 	"andromeda/belajar-golang-restful-api/service"
 	"log"
 	"net/http"
+	"os"
 
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/joho/godotenv"
@@ -30,7 +31,7 @@ func main() {
 	router := app.NewRouter(categoryController)
 
 	server := http.Server{
-		Addr:    "localhost:3000",
+		Addr:    "localhost:" + os.Getenv("PORT"),
 		Handler: middleware.NewAuthMiddleware(router),
 	}
 
